@@ -7,13 +7,15 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    nickname: {
+    mail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    name: {
+    password: {
       type: DataTypes.STRING,
       allowNull: true,
-    } }, { timestamps: false });
+    } 
+    }, { timestamps: false });
 };
+
