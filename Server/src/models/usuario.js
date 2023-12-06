@@ -7,15 +7,34 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    mail: {
+    nickname: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    password: {
+    email: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'recepcion', 'mecanico', 'user' ),
+      defaultValue: 'user',
+      allowNull: true
+    },
+    email_verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    picture: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM('Active', 'Inactive'),
       allowNull: true,
-    } 
+      defaultValue: 'Active',
+    },
     }, { timestamps: false });
 };
 

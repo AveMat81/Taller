@@ -1,13 +1,48 @@
-// const { User } = require('./models/user');
+const { Usuario } = require('../db')
+const { Op } = require("sequelize");
 
-// const createUser = async (req, res) => {
-//     try {
-//       const user = await User.create(req.body);
-//       return res.status(201).json(user);
-//     } catch (error) {
-//       return res.status(500).json({ error: 'Error al crear el usuario' });
-//     }
-//   };
+
+//CREA NUEVO USUARIO
+const createUser = async (nickname, email, picture, email_verified, status) => {
+    try {
+      const [user, created] = await Usuario.findOrCreate({
+        where: {
+          [Op.or]: [{ nickname }, { email }],
+        },
+        defaults: {
+          nickname,
+          email,
+          picture,
+          email_verified,
+          status,
+        },
+      });
+  
+      if (created) {
+        console.log("Nuevo usuario creado:", user.dataValues);
+      } else {
+        console.log("El usuario ya existe");
+      }
+  
+      return user;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
+
+module.exports = {
+    createUser
+}
+
+
+
+
+
+
+
+
   
 //   const getAllUsers = async (req, res) => {
 //     try {
