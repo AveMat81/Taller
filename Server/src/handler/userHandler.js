@@ -1,5 +1,5 @@
 const { 
-  createUser, getAllUsers, getUserById
+  createUser, getAllUsers, getUserById, updateUser, deleteUser
 } = require("../controllers/userControler");
 
 
@@ -51,16 +51,48 @@ const getUserByIdHandler = async (req, res) => {
 
   const { id } = req.params;
   try {
-    const user = getUserById(id);
+    const user = await getUserById(id);
+    console.log(user)
     return res.status(200).json(user);
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({message: "User not exist"})
   }
-}
+};
+
+//ACTUALIZANDO USUARIO
+
+const updateUserHandler = async (req, res) => {
+  const { id } = req.params;
+  const userData = req.body
+
+  try {
+    const userUpdate = await updateUser(id, userData);
+    return res.status(200).json(userUpdate)
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({message: "Something went wrong"})    
+  }
+};
+
+//BORRAR USUARIO X GATO
+
+const deleteUserHandler = async (req, res) => {
+    const { id } = req.params;
+  try {
+    const deleter = await deleteUser(id);
+    return res.status(200).json(deleter); 
+    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error to deleted")
+  }
+};
 
 module.exports = {
   newUserHandler,
   getAllUsersHandler,
-  getUserByIdHandler
+  getUserByIdHandler,
+  updateUserHandler,
+  deleteUserHandler
 }
