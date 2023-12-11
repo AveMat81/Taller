@@ -1,5 +1,5 @@
 const { 
-  createUser
+  createUser, getAllUsers, getUserById
 } = require("../controllers/userControler");
 
 
@@ -23,10 +23,44 @@ const newUserHandler = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ message: "SSomething went wrong" });
+    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 
+//OBTENER USUARIOS
+
+const getAllUsersHandler = async (req, res) => {
+  
+  try {
+    const usuarios = await getAllUsers();
+    if(!usuarios){
+      return res.status(404).send("users not exist")
+    }
+    return res.status(200).json(usuarios);
+
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({message: "Something went wrong"})
+    
+  }
+};
+
+//OBTENER USUARIO POR ID
+
+const getUserByIdHandler = async (req, res) => {
+
+  const { id } = req.params;
+  try {
+    const user = getUserById(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({message: "User not exist"})
+  }
+}
+
 module.exports = {
-  newUserHandler
+  newUserHandler,
+  getAllUsersHandler,
+  getUserByIdHandler
 }
