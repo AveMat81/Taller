@@ -1,5 +1,5 @@
 const { 
-    createVehiculo
+    createVehicle
   } = require("../controllers/vehiculoControler.js");
   
 
@@ -13,7 +13,7 @@ const newVehicleHandler = async (req, res) => {
     }
   
     try {
-      const newVehicle = await createVehiculo(
+      const newVehicle = await createVehicle(
         patente,
         marca,
         modelo,
