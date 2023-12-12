@@ -24,7 +24,7 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
 
   const getAllUsers = async () => {
     try {
-      const users = await User.findAll();
+      const users = await Usuario.findAll();
       if (!users) {
         return "There is no users yet";
       }
