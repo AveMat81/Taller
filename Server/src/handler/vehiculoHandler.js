@@ -7,9 +7,7 @@ const {
 const newVehicleHandler = async (req, res) => {
     const {patente, marca, modelo, año, nombre, apellido, telefono, fechaVTV } = req.body;
     if (!patente || !nombre) {
-      return res
-        .status(400)
-        .json({ message: "Patente or Nombre, required fields." });
+      return res.status(400).json({ message: "Patente or Nombre, required fields." });
     }
   
     try {

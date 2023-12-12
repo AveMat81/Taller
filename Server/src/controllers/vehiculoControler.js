@@ -3,7 +3,7 @@ const { Vehiculo } = require('../db.js');
 
 
 //CREA NUEVO VEHICULO
-const createVehicle = async (patente, marca, modelo,año, nombre,apellido,telefono,fechaVTV) => {
+const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, telefono, fechaVTV ) => {
     try {
       const coche = await Vehiculo.create ({
         patente,
