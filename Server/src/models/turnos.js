@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    hora: {
+        type: DataTypes.TIME,
+        allowNull: false,
+    },
     Observaciones: {
       type: DataTypes.STRING,
       allowNull: false,

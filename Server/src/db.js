@@ -42,7 +42,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 //const { Usuarios, Vehicles, Turnos, Ots, Historicos } = sequelize.models
-const { Usuario, Vehiculo, Turno, Ot, Historico } = sequelize.models
+const { Usuario, Vehiculo, Turno, Ot } = sequelize.models
 
 //const { Pokemon, Types } = sequelize.models; **ejemplo de modelos de POKEMON
 
