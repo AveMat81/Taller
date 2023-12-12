@@ -1,6 +1,6 @@
 const { 
   createUser, getAllUsers, getUserById, updateUser, deleteUser
-} = require("../controllers/userControler");
+} = require("../controllers/userController");
 
 
 //CREA NUEVO USUARIO

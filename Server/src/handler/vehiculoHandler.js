@@ -1,6 +1,6 @@
 const { 
     createVehicle
-  } = require("../controllers/vehiculoControler.js");
+  } = require("../controllers/vehiculoController.js");
   
 
   //CREA NUEVO USUARIO
