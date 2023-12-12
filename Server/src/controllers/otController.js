@@ -18,12 +18,12 @@ const createOt = async (patente, fecha, numero_ot, observaciones, estado) => {
   };
 
 //OBTENER TODOS LAS OTs
-  const getAllOt = async (req, res) => {
+  const getAllOt = async () => {
     try {
       const ordendetrabajo = await Ot.findAll();
       return ordendetrabajo
     } catch (error) {
-      return res.status(500).json({ error: 'Error to get all OT' });
+      console.log(error.message);
     }
   };
 
@@ -31,7 +31,7 @@ const createOt = async (patente, fecha, numero_ot, observaciones, estado) => {
 //OBTENER OT POR PATENTE
 const getOtByPatente = async (patente) =>{
     try {
-         const ordendetrabajo = await Ot.findOne({
+         const ordendetrabajo = await Ot.findAll({
           where: { patente }
         });
         if (ordendetrabajo) {

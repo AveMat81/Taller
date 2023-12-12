@@ -6,7 +6,7 @@ const {
   //CREA NUEVA OTs
   const newOtHandler = async (req, res) => {
     const { patente, fecha, numero_ot, observaciones, estado } = req.body;
-    if (!patente || !numero_ot) {
+    if (!patente) {
       return res
         .status(400)
         .json({ message: "patente and numero de ot required fields." });
