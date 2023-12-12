@@ -22,12 +22,15 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
   };
 
 
-  const getAllUsers = async (req, res) => {
+  const getAllUsers = async () => {
     try {
-      const users = await Usuario.findAll();
-      return users
+      const users = await User.findAll();
+      if (!users) {
+        return "There is no users yet";
+      }
+      return users;
     } catch (error) {
-      return res.status(500).json({ error: 'Error to get all user' });
+      console.log(error.message);
     }
   };
   

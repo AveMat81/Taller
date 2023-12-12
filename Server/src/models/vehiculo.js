@@ -4,7 +4,8 @@ module.exports = (sequelize) => {
     patente: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true,
     },
     marca: {
       type: DataTypes.STRING,

@@ -22,16 +22,40 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
     }
   };
 
-  module.exports = {
-    createVehicle
+  //BUSCAR TODOS LOS VEHICULO
+
+  const getAllVehicles = async () => {
+    try {
+      const cars = await Vehiculo.findAll();
+      if (!cars) {
+        return "There is no cars yet";
+      }
+      return cars;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  //BUSCAR VEHICULO POR PATENTE
+
+  const vehicleByPatente = async (patente) => {
+    try {
+      const coche = await Vehiculo.findOne({
+        where: { patente },
+      });
+      
+      return coche
+      
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+    
   }
 
 
-//   patente:
-//   marca:
-//   modelo:
-//   año: 
-//   nombre:
-//   apellido: 
-//   telefono:
-//   fechaVTV:
+  module.exports = {
+    createVehicle,
+    vehicleByPatente,
+    getAllVehicles
+  }

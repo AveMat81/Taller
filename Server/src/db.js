@@ -53,6 +53,12 @@ const { Usuario, Vehiculo, Turno, Ot, Historico } = sequelize.models
 // Pokemon.belongsToMany(Types, {through: 'pokemon_types',timestamps: false})
 // Types.belongsToMany(Pokemon, {through: 'pokemon_types',timestamps: false})
 
+// Relación uno a muchos: Un Vehiculo puede tener muchas Ordenes de Trabajo
+Vehiculo.hasMany(Ot, { foreignKey: 'patente' });
+
+// Relación uno a uno: Una Orden de Trabajo pertenece a un Vehiculo
+Ot.belongsTo(Vehiculo, { foreignKey: 'patente' });
+
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
    conn: sequelize, // para importart la conexión { conn } = require('./db.js');
