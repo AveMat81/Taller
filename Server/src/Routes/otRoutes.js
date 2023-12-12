@@ -2,7 +2,7 @@ const { Router } = require("express");
 const{
     newOtHandler, getAllOtHandler, getOtByPatenteHandler, updateOtHandler, deleteOtHandler, getOtByNumeroOtHandler
 } = require("../handler/otHandler.js");
-const { getOtByNumeroOt } = require("../controllers/otController.js");
+
 
 
 const otRouter = Router();

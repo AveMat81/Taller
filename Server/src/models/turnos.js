@@ -6,14 +6,14 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     fecha: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     hora: {
         type: DataTypes.TIME,
         allowNull: false,
     },
-    Observaciones: {
+    observaciones: {
       type: DataTypes.STRING,
       allowNull: false,
     },
