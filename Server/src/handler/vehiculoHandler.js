@@ -1,5 +1,5 @@
 const { 
-    createVehicle, vehicleByPatente, getAllVehicles
+    createVehicle, vehicleByPatente, getAllVehicles, updateVehicle, deleteVehicle
   } = require("../controllers/vehiculoController.js");
   
 
@@ -62,10 +62,39 @@ const getVehicleByPatenteHandler = async (req, res) => {
 
 //ACTUALIZAR VEHICULO
 
+const updateVehicleHandler = async (req, res) => {
+  const { patente } = req.params;
+  const vehicleData = req.body
+
+  try {
+    const vehicleUpdate = await updateVehicle(patente, vehicleData);
+    return res.status(200).json(vehicleUpdate)
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({message: "Something went wrong"})    
+  }
+};
+
 //ELIMINAR VEHICULO
+
+const deleteVehicleHandler = async (req, res) => {
+    const { patente } = req.params;
+  try {
+    const deleter = await deleteVehicle(patente);
+    return res.status(200).json(deleter); 
+    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error to deleted")
+  }
+};
+
+
 
 module.exports = {
     newVehicleHandler,
     getVehicleByPatenteHandler,
-    getVehiclesHandler
+    getVehiclesHandler,
+    deleteVehicleHandler,
+    updateVehicleHandler,
 };

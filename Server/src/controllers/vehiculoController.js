@@ -54,8 +54,41 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
   }
 
 
+  const updateVehicle = async (patente, vehicleData) => {
+        
+    try {
+      const [updated] = await Vehiculo.update(vehicleData, { where: { patente } });
+      if (updated) {
+        const updatedVehicle = await Vehiculo.findByPk(patente);
+        return updatedVehicle;
+      }
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+  
+  
+  const deleteVehicle = async (patente) => {
+        try {
+        const deleted = await Vehiculo.destroy({ where: { patente } });
+        if (deleted) {
+          return deleted;
+        }
+      } catch (error) {
+        console.error(error.message)
+      }
+    };
+
+
+
+
+
+
   module.exports = {
     createVehicle,
     vehicleByPatente,
-    getAllVehicles
+    getAllVehicles,
+    updateVehicle,
+    deleteVehicle,
   }
