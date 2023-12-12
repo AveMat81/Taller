@@ -42,41 +42,58 @@ const getOtByPatente = async (patente) =>{
         throw error;
     }
 };
+//OBTENER OT POR NUMERO DE OT
+const getOtByNumeroOt = async (numero_ot) =>{
+    try {
+         const ordendetrabajo = await Ot.findAll({
+          where: { numero_ot }
+        });
+        if (ordendetrabajo) {
+          return ordendetrabajo;
+        }
+      } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+};
 
-   
-    //   const updateOt = async (patente, OtData) => {
+   //ACTUALIZAR OT
+      const updateOt = async (numero_ot, OtData) => {
         
-    //     try {
-    //       const [updated] = await Ot.update(OtData, { where: { patente } });
-    //       if (updated) {
-    //         const updatedOt = await Ot.findOne({
-    //             where  :{patente}});
-    //         return updatedOt;
-    //       }
-    //     } catch (error) {
-    //       console.error(error.message);
-    //       throw error;
-    //     }
-    //   };
+        try {
+          const [updated] = await Ot.update(OtData, { where: { numero_ot } });
+          if (updated) {
+            const updatedOt = await Ot.findOne({
+                where  :{numero_ot}});
+            return updatedOt;
+          }
+        } catch (error) {
+          console.error(error.message);
+          throw error;
+        }
+      };
       
-    //     const deleteOt = async (numero_ot) => {
+      //BORRAR OT
+
+        const deleteOt = async (numero_ot) => {
           
-    //       try {
-    //         const deleted = await Ot.destroy({ where: { numero_ot } });
-    //         if (deleted) {
-    //           return deleted;
-    //         }
-    //       } catch (error) {
-    //         console.error(error.message)
-    //       }
-    //     };
+          try {
+            const deleted = await Ot.destroy({ where: { numero_ot } });
+            if (deleted) {
+              return deleted;
+            }
+          } catch (error) {
+            console.error(error.message)
+          }
+        };
 
 module.exports = {
      createOt,
      getAllOt,
      getOtByPatente,
-    //  updateOt,
-    //  deleteOt
+     getOtByNumeroOt,
+     updateOt,
+     deleteOt
 }
 
     // patente: 

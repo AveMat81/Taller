@@ -7,7 +7,7 @@ const {
 const newVehicleHandler = async (req, res) => {
     const {patente, marca, modelo, año, nombre, apellido, telefono, fechaVTV } = req.body;
     if (!patente || !nombre) {
-      return res.status(400).json({ message: "Patente or Nombre, required fields." });
+      return res.status(400).json({ message: "Patente or Name, required fields." });
     }
   
     try {
@@ -59,6 +59,10 @@ const getVehicleByPatenteHandler = async (req, res) => {
     return res.status(500).json({message: "Car not exist"})
   }
 }
+
+//ACTUALIZAR VEHICULO
+
+//ELIMINAR VEHICULO
 
 module.exports = {
     newVehicleHandler,
