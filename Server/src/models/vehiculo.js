@@ -1,9 +1,11 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define('Vehicle', {
+  sequelize.define('Vehiculo', {
     patente: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      primaryKey: true,
     },
     marca: {
       type: DataTypes.STRING,

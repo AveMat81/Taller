@@ -40,7 +40,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Usuario, Vehiculo, Turnos, Ot, Historico } = sequelize.models
+
+//const { Usuarios, Vehicles, Turnos, Ots, Historicos } = sequelize.models
+const { Usuario, Vehiculo, Turno, Ot, Historico } = sequelize.models
 
 //const { Pokemon, Types } = sequelize.models; **ejemplo de modelos de POKEMON
 
@@ -50,6 +52,12 @@ const { Usuario, Vehiculo, Turnos, Ot, Historico } = sequelize.models
 //EJEMPLO DE REALCIONES DE POKEMON
 // Pokemon.belongsToMany(Types, {through: 'pokemon_types',timestamps: false})
 // Types.belongsToMany(Pokemon, {through: 'pokemon_types',timestamps: false})
+
+// Relación uno a muchos: Un Vehiculo puede tener muchas Ordenes de Trabajo
+Vehiculo.hasMany(Ot, { foreignKey: 'patente' });
+
+// Relación uno a uno: Una Orden de Trabajo pertenece a un Vehiculo
+Ot.belongsTo(Vehiculo, { foreignKey: 'patente' });
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

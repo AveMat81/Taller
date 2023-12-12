@@ -1,16 +1,17 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define('Ot', {
+    numero_ot: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     patente: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     fecha: {
         type: DataTypes.DATE,
-        allowNull: false,
-    },
-    numero_ot: {
-        type: DataTypes.STRING,
         allowNull: false,
     },
     observaciones: {
