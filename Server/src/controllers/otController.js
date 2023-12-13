@@ -57,9 +57,8 @@ const getOtByNumeroOt = async (numero_ot) =>{
     }
 };
 
-   //ACTUALIZAR OT
-      const updateOt = async (numero_ot, OtData) => {
-        
+//ACTUALIZAR OT
+const updateOt = async (numero_ot, OtData) => {        
         try {
           const [updated] = await Ot.update(OtData, { where: { numero_ot } });
           if (updated) {
@@ -73,10 +72,8 @@ const getOtByNumeroOt = async (numero_ot) =>{
         }
       };
       
-      //BORRAR OT
-
-        const deleteOt = async (numero_ot) => {
-          
+//BORRAR OT
+const deleteOt = async (numero_ot) => {          
           try {
             const deleted = await Ot.destroy({ where: { numero_ot } });
             if (deleted) {
@@ -95,10 +92,3 @@ module.exports = {
      updateOt,
      deleteOt
 }
-
-    // patente: 
-    // fecha: 
-    // numero_ot: 
-    // observaciones: 
-    // estado: 
- 

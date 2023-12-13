@@ -3,8 +3,6 @@ const{
     newOtHandler, getAllOtHandler, getOtByPatenteHandler, updateOtHandler, deleteOtHandler, getOtByNumeroOtHandler
 } = require("../handler/otHandler.js");
 
-
-
 const otRouter = Router();
 
 otRouter.post("/", newOtHandler);

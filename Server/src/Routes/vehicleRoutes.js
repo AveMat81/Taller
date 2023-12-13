@@ -1,6 +1,7 @@
 const { Router } = require("express");
-const{ newVehicleHandler, getVehicleByPatenteHandler, getVehiclesHandler, updateVehicleHandler, deleteVehicleHandler} = require("../handler/vehiculoHandler.js");
-
+const { 
+    newVehicleHandler, getVehicleByPatenteHandler, getVehiclesHandler, updateVehicleHandler, deleteVehicleHandler
+} = require("../handler/vehiculoHandler.js");
 
 const vehicleRouter = Router();
 

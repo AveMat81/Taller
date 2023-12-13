@@ -1,7 +1,13 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define('Turnos', {
-    patente: {
+     id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+     patente: {
       type: DataTypes.STRING,
       allowNull: false,
     },

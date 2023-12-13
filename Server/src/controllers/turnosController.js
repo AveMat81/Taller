@@ -1,7 +1,7 @@
 const { Turnos } = require('../db.js');
 const { Op } = require('sequelize');
 
-
+//CREAR UN TURNO
 const createTurno = async (patente, fecha, hora, observaciones) =>{
 try {
     const turno = await Turnos.create({
@@ -15,24 +15,9 @@ try {
     console.error(error.message);
     throw error;
 }
-}
+};
 
-//TRAE LOS TURNOS 
-
-// const getTurnos = async (fecha) =>{
-//     try {
-//         const turnos = await Turnos.findAll({
-//             where: { fecha }
-//         });
-//         if (turnos) {
-//          return turnos;
-//         }
-//     } catch (error) {
-//       console.log(error.message);  
-//       throw error;
-//     }
-// }
-
+//TRAER TURNOS POR FECHA
 const getTurnos = async (fecha) => {
     try {
         const turnos = await Turnos.findAll({
@@ -42,7 +27,6 @@ const getTurnos = async (fecha) => {
                 }
             }
         });
-        console.log("Soy los turnos del controller", turnos)
         return turnos;
     } catch (error) {
         console.error(error.message);
@@ -50,8 +34,52 @@ const getTurnos = async (fecha) => {
     }
 };
 
+//TRAER TURNOS POR PATENTE
+const getTurnoByPatente = async (patente) =>{
+    try {
+        const turnos = await Turnos.findAll({
+            where:{ patente }          
+        })
+        if (turnos){
+            return turnos;
+        }
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+};
+
+//ACTUALIZAR TURNO
+ const updateTurno = async (id, turnoData) => {      
+    try {
+      const [updated] = await Turnos.update(turnoData, { where: { id } });
+      if (updated) {
+        const updatedTurno = await Turnos.findOne({
+            where  :{id}});
+        return updatedTurno;
+      }
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
+//BORRAR TURNO
+ const deleteTurno = async (id) => {      
+      try {
+        const deleted = await Turnos.destroy({ where: { id } });
+        if (deleted) {
+          return deleted;
+        }
+      } catch (error) {
+        console.error(error.message)
+      }
+    };
 
 module.exports = {
     createTurno,
-    getTurnos
+    getTurnos,
+    getTurnoByPatente,
+    deleteTurno,
+    updateTurno
 }

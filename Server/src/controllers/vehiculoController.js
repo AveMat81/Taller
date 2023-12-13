@@ -1,7 +1,5 @@
 const { Vehiculo } = require('../db.js');
 
-
-
 //CREA NUEVO VEHICULO
 const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, telefono, fechaVTV ) => {
     try {
@@ -22,23 +20,21 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
     }
   };
 
-  //BUSCAR TODOS LOS VEHICULO
-
-  const getAllVehicles = async () => {
+//BUSCAR TODOS LOS VEHICULO
+const getAllVehicles = async () => {
     try {
       const cars = await Vehiculo.findAll();
       if (!cars) {
-        return "There is no cars yet";
+        return "No se encontraron vehiculos";
       }
       return cars;
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
-  //BUSCAR VEHICULO POR PATENTE
-
-  const vehicleByPatente = async (patente) => {
+//BUSCAR VEHICULO POR PATENTE
+const vehicleByPatente = async (patente) => {
     try {
       const coche = await Vehiculo.findOne({
         where: { patente },
@@ -51,11 +47,10 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
       throw error;
     }
     
-  }
+  };
 
-
-  const updateVehicle = async (patente, vehicleData) => {
-        
+//ACTUALIZAR VEHICULO
+const updateVehicle = async (patente, vehicleData) => {       
     try {
       const [updated] = await Vehiculo.update(vehicleData, { where: { patente } });
       if (updated) {
@@ -68,7 +63,7 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
     }
   };
   
-  
+//BORRAR VEHICULO  
   const deleteVehicle = async (patente) => {
         try {
         const deleted = await Vehiculo.destroy({ where: { patente } });
@@ -80,12 +75,7 @@ const createVehicle = async ( patente, marca, modelo, año, nombre, apellido, te
       }
     };
 
-
-
-
-
-
-  module.exports = {
+    module.exports = {
     createVehicle,
     vehicleByPatente,
     getAllVehicles,
