@@ -1,9 +1,7 @@
 const { Usuario } = require('../db.js');
 const { Op } = require("sequelize");
 
-
 //CREA NUEVO USUARIO
-
 const createUser = async (nickname, email, picture, email_verified, status) => {
     try {
       const user = await Usuario.create({
@@ -12,7 +10,6 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
           picture,
           email_verified,
           status,
-
       });
       return user;
     } catch (error) {
@@ -21,12 +18,12 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
     }
   };
 
-
-  const getAllUsers = async () => {
+//OBTIENE TODOS LOS USUARIOS
+const getAllUsers = async () => {
     try {
-      const users = await User.findAll();
+      const users = await Usuario.findAll();
       if (!users) {
-        return "There is no users yet";
+        return "No se encuntraron usuarios";
       }
       return users;
     } catch (error) {
@@ -34,9 +31,8 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
     }
   };
   
-  //OBTIENE USUARIO POR ID
-    const getUserById = async (id) => {
-      
+//OBTIENE USUARIO POR ID
+const getUserById = async (id) => {      
       try {
         const user = await Usuario.findByPk(id);
         if (user) {
@@ -46,11 +42,10 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
         console.error(error.message);
         throw error;
       }
-    };
-   
-   
-      const updateUser = async (id, userData) => {
-        
+    }; 
+
+//MODIFICAR USUARIO    
+const updateUser = async (id, userData) => {       
         try {
           const [updated] = await Usuario.update(userData, { where: { id } });
           if (updated) {
@@ -62,9 +57,9 @@ const createUser = async (nickname, email, picture, email_verified, status) => {
           throw error;
         }
       };
-      
-        const deleteUser = async (id) => {
-          
+
+//BORRAR USUARIO      
+const deleteUser = async (id) => {          
           try {
             const deleted = await Usuario.destroy({ where: { id } });
             if (deleted) {

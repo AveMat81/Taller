@@ -1,15 +1,14 @@
 const { 
-    createOt , getAllOt, getOtByPatente, updateOt, deleteOt
+    createOt , getAllOt, getOtByPatente, updateOt, deleteOt, getOtByNumeroOt
   } = require("../controllers/otController");
   
-  
-  //CREA NUEVA OTs
-  const newOtHandler = async (req, res) => {
+//CREA NUEVA OT
+const newOtHandler = async (req, res) => {
     const { patente, fecha, numero_ot, observaciones, estado } = req.body;
-    if (!patente || !numero_ot) {
+    if (!patente) {
       return res
         .status(400)
-        .json({ message: "patente and numero de ot required fields." });
+        .json({ message: "es obligatorio cargar una patente." });
     }
   
     try {
@@ -23,82 +22,83 @@ const {
       res.status(201).json(newOt);
     } catch (error) {
       console.error(error.message);
-      return res.status(500).json({ message: "Something went wrong" });
+      return res.status(500).json({ message: "Algo paso" });
     }
   };
   
-  //OBTENER OTs
-  
-  const getAllOtHandler = async (req, res) => {
-    
+//OBTENER OTs 
+const getAllOtHandler = async (req, res) => {    
     try {
       const ots = await getAllOt();
       if(!ots){
-        return res.status(404).send("ot not exist")
+        return res.status(404).send("no hay OTs")
       }
       return res.status(200).json(ots);
   
     } catch (error) {
       console.error(error.message);
-      return res.status(500).json({message: "Something went wrong"})
+      return res.status(500).json({message: "Algo paso"})
       
     }
   };
   
-  //OBTENER USUARIO POR PATENTE
-  
-  const getOtByPatenteHandler = async (req, res) => {
-  
+//OBTENER OTs POR PATENTE  
+const getOtByPatenteHandler = async (req, res) => {  
     const { patente } = req.params;
     try {
       const ots = await getOtByPatente(patente);
-      console.log(ots)
       return res.status(200).json(ots);
     } catch (error) {
       console.error(error.message);
-      return res.status(500).json({message: "patente not exist"})
+      return res.status(500).json({message: "No hay datos sobre esa patente"})
+    }
+  };
+
+//OBTENER OTs POR NUMERO DE OT  
+  const getOtByNumeroOtHandler = async (req, res) => {
+    const { numero_ot } = req.params;
+    try {
+      const ots = await getOtByNumeroOt(numero_ot);
+      return res.status(200).json(ots);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).json({message: "OT no encontrada"})
     }
   };
   
-//   //ACTUALIZANDO USUARIO
+//ACTUALIZANDO OT
+  const updateOtHandler = async (req, res) => {
+    const { numero_ot } = req.params;
+    const otData = req.body
   
-//   const updateOtHandler = async (req, res) => {
-//     const { numero_ot } = req.params;
-//     const otData = req.body
+    try {
+      const otUpdate = await updateOt(numero_ot, otData);
+      return res.status(200).json(otUpdate)
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).json({message: "Algo paso"})    
+    }
+  };
   
-//     try {
-//       const otUpdate = await updateOt(numero_ot, otData);
-//       return res.status(200).json(otUpdate)
-//     } catch (error) {
-//       console.error(error.message);
-//       return res.status(500).json({message: "Something went wrong"})    
-//     }
-//   };
-  
-//   //BORRAR POR NUMERO_OT
-  
-//   const deleteOtHandler = async (req, res) => {
-//       const { numero_ot } = req.params;
-//     try {
-//       const deleter = await deleteOt(numero_ot);
-//       return res.status(200).json(deleter); 
+//BORRAR POR NUMERO_OT 
+  const deleteOtHandler = async (req, res) => {
+      const { numero_ot } = req.params;
+    try {
+      const deleter = await deleteOt(numero_ot);
+      return res.status(200).json(deleter); 
       
-//     } catch (error) {
-//       console.error(error);
-//       return res.status(500).send("Error to deleted")
-//     }
-//   };
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send("Error al borrar")
+    }
+  };
   
   module.exports = {
     newOtHandler,
     getAllOtHandler,
     getOtByPatenteHandler,
-    // updateOtHandler,
-    // deleteOtHandler
+    updateOtHandler,
+    deleteOtHandler,
+    getOtByNumeroOtHandler
   }
-    // patente: 
-    // fecha: 
-    // numero_ot: 
-    // observaciones: 
-    // estado: 
  

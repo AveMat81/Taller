@@ -1,15 +1,25 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define('Turnos', {
-    patente: {
+     id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+     patente: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     fecha: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    Observaciones: {
+    hora: {
+        type: DataTypes.TIME,
+        allowNull: false,
+    },
+    observaciones: {
       type: DataTypes.STRING,
       allowNull: false,
     },

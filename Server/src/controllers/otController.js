@@ -18,12 +18,12 @@ const createOt = async (patente, fecha, numero_ot, observaciones, estado) => {
   };
 
 //OBTENER TODOS LAS OTs
-  const getAllOt = async (req, res) => {
+  const getAllOt = async () => {
     try {
       const ordendetrabajo = await Ot.findAll();
       return ordendetrabajo
     } catch (error) {
-      return res.status(500).json({ error: 'Error to get all OT' });
+      console.log(error.message);
     }
   };
 
@@ -31,7 +31,7 @@ const createOt = async (patente, fecha, numero_ot, observaciones, estado) => {
 //OBTENER OT POR PATENTE
 const getOtByPatente = async (patente) =>{
     try {
-         const ordendetrabajo = await Ot.findOne({
+         const ordendetrabajo = await Ot.findAll({
           where: { patente }
         });
         if (ordendetrabajo) {
@@ -42,46 +42,53 @@ const getOtByPatente = async (patente) =>{
         throw error;
     }
 };
+//OBTENER OT POR NUMERO DE OT
+const getOtByNumeroOt = async (numero_ot) =>{
+    try {
+         const ordendetrabajo = await Ot.findAll({
+          where: { numero_ot }
+        });
+        if (ordendetrabajo) {
+          return ordendetrabajo;
+        }
+      } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+};
 
-   
-    //   const updateOt = async (patente, OtData) => {
-        
-    //     try {
-    //       const [updated] = await Ot.update(OtData, { where: { patente } });
-    //       if (updated) {
-    //         const updatedOt = await Ot.findOne({
-    //             where  :{patente}});
-    //         return updatedOt;
-    //       }
-    //     } catch (error) {
-    //       console.error(error.message);
-    //       throw error;
-    //     }
-    //   };
+//ACTUALIZAR OT
+const updateOt = async (numero_ot, OtData) => {        
+        try {
+          const [updated] = await Ot.update(OtData, { where: { numero_ot } });
+          if (updated) {
+            const updatedOt = await Ot.findOne({
+                where  :{numero_ot}});
+            return updatedOt;
+          }
+        } catch (error) {
+          console.error(error.message);
+          throw error;
+        }
+      };
       
-    //     const deleteOt = async (numero_ot) => {
-          
-    //       try {
-    //         const deleted = await Ot.destroy({ where: { numero_ot } });
-    //         if (deleted) {
-    //           return deleted;
-    //         }
-    //       } catch (error) {
-    //         console.error(error.message)
-    //       }
-    //     };
+//BORRAR OT
+const deleteOt = async (numero_ot) => {          
+          try {
+            const deleted = await Ot.destroy({ where: { numero_ot } });
+            if (deleted) {
+              return deleted;
+            }
+          } catch (error) {
+            console.error(error.message)
+          }
+        };
 
 module.exports = {
      createOt,
      getAllOt,
      getOtByPatente,
-    //  updateOt,
-    //  deleteOt
+     getOtByNumeroOt,
+     updateOt,
+     deleteOt
 }
-
-    // patente: 
-    // fecha: 
-    // numero_ot: 
-    // observaciones: 
-    // estado: 
- 

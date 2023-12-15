@@ -3,7 +3,6 @@ const{
     newUserHandler, getAllUsersHandler, getUserByIdHandler, updateUserHandler, deleteUserHandler
 } = require("../Handler/userHandler");
 
-
 const userRouter = Router();
 
 userRouter.post("/", newUserHandler);
